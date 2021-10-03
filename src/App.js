@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import realtime from './firebase.js';
-import {ref, onValue, push} from 'firebase/database';
+import {ref, onValue} from 'firebase/database';
 import './App.css';
 import TaskItem from './TaskItem.js';
+import TaskForm from './TaskForm.js';
+import TaskTiming from './TaskTiming.js';
+
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [userInput, setUserInput] = useState("");
+  // const [userInput, setUserInput] = useState("");
 
   useEffect(() => {
     const dbRef = ref(realtime);
@@ -18,12 +21,15 @@ function App() {
       const newArray = [];
 
       for (let property in myData) {
-        console.log(property);
-        console.log(myData)
+        // console.log(property, 'property key');
+        // console.log(myData)
         const taskObject = {
           key: property,
-          title: myData[property].taskName,          
+          title: myData[property].taskName,
+          complete: myData[property].taskComplete,
+          tomorrow: myData[property].taskTomorrow
         }
+        console.log(taskObject, "printing task object")
         newArray.push(taskObject);
       }
       setTasks(newArray);
@@ -31,46 +37,18 @@ function App() {
   }, [])
 
 
-  const handleChange = (event) => {
-    setUserInput(event.target.value);
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (userInput) {
-      const taskObject = {
-        taskName: userInput,
-        complete: false
-      }
-      const dbRef = ref(realtime);
-      push(dbRef, taskObject);
-      setUserInput("");
-    } else {
-      alert('write something!');
-    }
-    // console.log('submitted')
-    // console.log(userInput)
-  }
-
   return (
     <div className="App">
       <h1>test</h1>
-
-      <form onSubmit={handleSubmit}>
-          <label htmlFor="usertasks">Type the name of a task to add!</label>
-          <input 
-          type="text" 
-          id="usertasks" 
-          onChange={handleChange}
-          value={userInput}
-          />
-          <button>Add it!</button>
-      </form>
+      <TaskForm />
+      <TaskTiming />
       <ul>
         {tasks.map((individualTaskObject) => {
           return (
-            <TaskItem key={individualTaskObject.key}
+            <TaskItem key={individualTaskObject.key} 
+            id={individualTaskObject.key}
             title={individualTaskObject.title}
+            complete={individualTaskObject.complete}
             />
           )
         })}
