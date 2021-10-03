@@ -2,36 +2,76 @@ import { useState, useEffect } from 'react';
 import realtime from './firebase.js';
 import {ref, onValue, push} from 'firebase/database';
 import './App.css';
+import TaskItem from './TaskItem.js';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [userInput, setUserInput] = useState("");
+
   useEffect(() => {
-    // Here we create a variable that holds a reference to our database
     const dbRef = ref(realtime);
 
-    // Here we add an event listener to that variable that will fire
-    // every time there is a change in the database.
+    onValue(dbRef, (snapshot) => {
+      // console.log(result.val());
 
-    // This event listener takes a callback function which we will use to get our data
-    // from the database, and call that data 'response'.
-    onValue(dbRef, (response) => {
+      const myData = snapshot.val();
+      const newArray = [];
 
-      // Here we use Firebase's .val() method to parse our database info the way we want it
-      console.log(response.val());
+      for (let property in myData) {
+        console.log(property);
+        console.log(myData)
+        const taskObject = {
+          key: property,
+          title: myData[property].taskName,          
+        }
+        newArray.push(taskObject);
+      }
+      setTasks(newArray);
     })
   }, [])
 
 
+  const handleChange = (event) => {
+    setUserInput(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (userInput) {
+      const taskObject = {
+        taskName: userInput,
+        complete: false
+      }
+      const dbRef = ref(realtime);
+      push(dbRef, taskObject);
+      setUserInput("");
+    } else {
+      alert('write something!');
+    }
+    // console.log('submitted')
+    // console.log(userInput)
+  }
+
   return (
     <div className="App">
       <h1>test</h1>
+
+      <form onSubmit={handleSubmit}>
+          <label htmlFor="usertasks">Type the name of a task to add!</label>
+          <input 
+          type="text" 
+          id="usertasks" 
+          onChange={handleChange}
+          value={userInput}
+          />
+          <button>Add it!</button>
+      </form>
       <ul>
-        {tasks.map((individualTask) => {
+        {tasks.map((individualTaskObject) => {
           return (
-            <li>
-              <p>{individualTask}</p>
-            </li>
+            <TaskItem key={individualTaskObject.key}
+            title={individualTaskObject.title}
+            />
           )
         })}
       </ul>
