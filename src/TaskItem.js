@@ -1,24 +1,54 @@
 
 import realtime from './firebase.js';
-import {ref, remove} from 'firebase/database';
+import {ref, remove, update} from 'firebase/database';
 import './App.css';
 
 function TaskItem(props) {
   // console.log(props,"printing props")
 
-  const handleDelete = (deleteTask) => {
-    const dbRef = ref(realtime, deleteTask)
+  const handleDelete = (taskId) => {
+    const dbRef = ref(realtime, taskId)
     remove(dbRef);
+  }
+
+  const handleTiming = (taskId, taskDay) => {
+    const dbRef = ref(realtime, taskId)
+    // let newDayVal = taskDay
+    // if (taskDay === true) {
+    //   newDayVal = false
+    // } else if (taskDay === false) {
+    //   newDayVal = true
+    // }
+    let newDayVal = !taskDay
+    console.log(newDayVal)
+    const newTaskObject = {
+      taskTomorrow: newDayVal
+    }
+    update(dbRef, newTaskObject)
+  }
+  
+  const handleTitle = (taskId) => {
+    const dbRef = ref(realtime, taskId)
+    const newTaskObject = {
+      taskName: "somethingElse",
+    }
+    update(dbRef, newTaskObject)
   }
 
   return(
     <>
       <li>
         <div className="taskItem">
-          <h2>{props.title}</h2>
+          <p>{props.title}</p>
           <button
             onClick={ () => handleDelete(props.id) }
-          >delete</button>
+          >Delete</button>
+          <button
+            onClick={ () => handleTiming(props.id, props.tomorrow) }
+          >Push to tomorrow</button>
+          <button
+            onClick={ () => handleTitle(props.id) }
+          >Change Task Name</button>
         </div>
       </li>
     </>

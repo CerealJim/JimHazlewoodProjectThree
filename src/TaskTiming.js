@@ -1,13 +1,22 @@
 
+import realtime from './firebase.js';
+import {ref} from 'firebase/database';
+import './App.css';
 
 function TaskTiming() {
 
-  return (
-    <>
-        <button className="todayButton timingButton">Today</button>
-        <button className="tomorrowButton timingButton">Push To Tomorrow</button>
 
-    </>
+  const handleClick = () => {
+
+  }
+
+
+  return (
+    <div className="timingButtonContainer">
+        <button className="todayButton timingButton" onClick={handleClick}>Today</button>
+        <button className="tomorrowButton timingButton" onClick={handleClick}>Tomorrow</button>
+        <button className="deleteButton timingButton" onClick={handleClick}>Delete all tasks</button>
+    </div>
   )
 }
 

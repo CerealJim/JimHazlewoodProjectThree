@@ -38,21 +38,33 @@ function App() {
 
 
   return (
-    <div className="App">
-      <h1>test</h1>
-      <TaskForm />
-      <TaskTiming />
-      <ul>
-        {tasks.map((individualTaskObject) => {
-          return (
-            <TaskItem key={individualTaskObject.key} 
-            id={individualTaskObject.key}
-            title={individualTaskObject.title}
-            complete={individualTaskObject.complete}
-            />
-          )
-        })}
-      </ul>
+    <div className="wrapper">
+      <header>
+        <h1>Task List</h1>
+        <h2>Input a task for today or tomorrow</h2>
+      </header>
+      <section className="formContainer">
+        <TaskForm />
+        <TaskTiming />
+      </section>
+      <section className="taskContainer">
+        <h3>Today or tomorrow's task list title goes here{}</h3>
+        <ul>
+          {tasks.map((individualTaskObject) => {
+            return (
+              <TaskItem key={individualTaskObject.key} 
+              id={individualTaskObject.key}
+              title={individualTaskObject.title}
+              complete={individualTaskObject.complete}
+              tomorrow={individualTaskObject.tomorrow}
+              />
+            )
+          })}
+        </ul>
+      </section>
+      <footer>
+        
+      </footer>
     </div>
   );
 }
