@@ -2,6 +2,7 @@
 import realtime from './firebase.js';
 import {ref, remove, update} from 'firebase/database';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function TaskItem(props) {
   // console.log(props,"printing props")
@@ -11,14 +12,18 @@ function TaskItem(props) {
     remove(dbRef);
   }
 
+  const handleComplete = (taskId, taskComplete) => {
+    const dbRef = ref(realtime, taskId)
+    let newTaskVal = !taskComplete
+    console.log(newTaskVal)
+    const newTaskObject = {
+      taskComplete: newTaskVal
+    }
+    update(dbRef, newTaskObject)
+  }
+
   const handleTiming = (taskId, taskDay) => {
     const dbRef = ref(realtime, taskId)
-    // let newDayVal = taskDay
-    // if (taskDay === true) {
-    //   newDayVal = false
-    // } else if (taskDay === false) {
-    //   newDayVal = true
-    // }
     let newDayVal = !taskDay
     console.log(newDayVal)
     const newTaskObject = {
@@ -39,7 +44,14 @@ function TaskItem(props) {
     <>
       <li>
         <div className="taskItem">
-          <p>{props.title}</p>
+          <div className="taskCompleteContainer" onClick={ () => handleComplete(props.id, props.complete) }>
+            {
+              props.complete === false ?
+              <p><FontAwesomeIcon icon="square" /> {props.title}</p> :
+              <p><FontAwesomeIcon icon="check-square" /> {props.title}</p>
+            }
+          </div>
+
           <button
             onClick={ () => handleDelete(props.id) }
           >Delete</button>
