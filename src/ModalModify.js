@@ -1,6 +1,6 @@
 import React from "react";
 
-function Modal(props) {
+function ModalModify(props) {
 
   if(!props.show) {
     return null
@@ -33,4 +33,4 @@ function Modal(props) {
   )
 }
 
-export default Modal
+export default ModalModify

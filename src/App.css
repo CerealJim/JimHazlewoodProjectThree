@@ -108,7 +108,13 @@ form {
 LIST STYLES
 ===================== */
 
+li {
+  list-style: none;
+}
 
+.checkMarked {
+  text-decoration: line-through;
+}
 
 /* =====================
 MODAL STYLES

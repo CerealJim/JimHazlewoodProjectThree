@@ -61,18 +61,20 @@ function App() {
       </section>
       <section className="taskContainer">
         <h3>Today or tomorrow's task list title goes here{}</h3>
-        <ul>
-          {tasks.map((individualTaskObject) => {
-            return (
-              <TaskItem key={individualTaskObject.key} 
-              id={individualTaskObject.key}
-              title={individualTaskObject.title}
-              complete={individualTaskObject.complete}
-              tomorrow={individualTaskObject.tomorrow}
-              />
-            )
-          })}
-        </ul>
+        <div class="individualTaskContainer">
+          <ul>
+            {tasks.map((individualTaskObject) => {
+              return (
+                <TaskItem key={individualTaskObject.key} 
+                id={individualTaskObject.key}
+                title={individualTaskObject.title}
+                complete={individualTaskObject.complete}
+                tomorrow={individualTaskObject.tomorrow}
+                />
+              )
+            })}
+          </ul>
+        </div>
       </section>
       <footer>
         
