@@ -1,11 +1,13 @@
-
+import { useState } from 'react';
 import realtime from './firebase.js';
 import {ref, remove, update} from 'firebase/database';
 import './App.css';
+import Modal from './Modal.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function TaskItem(props) {
-  // console.log(props,"printing props")
+
+  const [show, setShow] = useState(false)
 
   const handleDelete = (taskId) => {
     const dbRef = ref(realtime, taskId)
@@ -32,12 +34,17 @@ function TaskItem(props) {
     update(dbRef, newTaskObject)
   }
   
-  const handleTitle = (taskId) => {
+  const handleTitle = (taskId, event) => {
+    // console.log(event.target.newTaskName.value, "This is the new task")
+    // console.log(event,"event")
     const dbRef = ref(realtime, taskId)
+
     const newTaskObject = {
-      taskName: "somethingElse",
+      taskName: event.target.newTaskName.value,
     }
     update(dbRef, newTaskObject)
+    //show modal
+    setShow(false)
   }
 
   return(
@@ -52,15 +59,15 @@ function TaskItem(props) {
             }
           </div>
 
-          <button
-            onClick={ () => handleDelete(props.id) }
-          >Delete</button>
-          <button
-            onClick={ () => handleTiming(props.id, props.tomorrow) }
-          >Push to tomorrow</button>
-          <button
-            onClick={ () => handleTitle(props.id) }
-          >Change Task Name</button>
+          <button onClick={ () => handleDelete(props.id) }>Delete</button>
+          <button onClick={ () => handleTiming(props.id, props.tomorrow) }>Save for later</button>
+          <button onClick={ () => setShow(true)}>Modify</button>
+          <Modal 
+            onClose={() => setShow(false)} 
+            handleModalSubmit={(event) => handleTitle(props.id, event)}
+            title={props.title}
+            show={show}
+          />
         </div>
       </li>
     </>

@@ -12,6 +12,10 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
+/* =====================
+GOOGLE FONT 
+===================== */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Roboto&display=swap');
 
 /* =====================
 GENERAL STYLES
@@ -19,15 +23,8 @@ GENERAL STYLES
 html {
 	font-size: 125%; /* setting font-size default to 20px*/
 	line-height: 1.5;
-
-  /* background: #8EC5FC 0%; */
-
-
-}
-
-h1, h2, h3, li, p {
-  margin: 0;
-  padding: 0;
+  color: white;
+  background-color: #85DCBA;
 }
 
 .wrapper {
@@ -36,29 +33,104 @@ h1, h2, h3, li, p {
   margin:0 auto;
 }
 
+h1, h2, h3, li, p {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  font-family: 'Lora', serif;
+  font-weight: bold;
+}
+
+button, p {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Credit to Glen Carstens-Peters at unsplash: https://unsplash.com/photos/RLw-UC03Gwc */
+img {
+  width:100%;
+  height:auto;
+  display:block;
+}
+
 h1,
 h2,
 form,
 ul {
   margin: 0;
   padding: 0;
-  font-weight: normal;
 }
 
 button {
-  /* color: white; */
-  /* background-color:  #FFE8D4; */
+  color: white;
+  background-color: #E8A87C;
   font-weight:700;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 button:active,
+button:focus-within,
 button:hover {
-  background-color: rgb(218, 60, 33);
+  background-color: #E27D60;
 }
 
+/* =====================
+HEADER STYLES
+===================== */
+
+header {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  text-align: center;
+  padding:4rem 0;
+}
+h1 {
+  border-bottom: 5px solid #C38D9E;
+  margin-bottom: 1.5rem;
+}
+.imgContainer {
+  width:30%;
+  height:auto;
+}
+
+/* =====================
+FORM STYLES
+===================== */
+
+form {
+  display:flex;
+}
+
+/* =====================
+LIST STYLES
+===================== */
 
 
+
+/* =====================
+MODAL STYLES
+===================== */
+.modal {
+  position:fixed;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  width: 70%;
+  background-color: white;
+  text-align: center;
+}
 
 
 /* =====================

@@ -5,6 +5,8 @@ import './App.css';
 import TaskItem from './TaskItem.js';
 import TaskForm from './TaskForm.js';
 import TaskTiming from './TaskTiming.js';
+import checkListImg from '../src/checkListImg.jpg'
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
@@ -49,6 +51,9 @@ function App() {
       <header>
         <h1>Task List</h1>
         <h2>Input a task for today or tomorrow</h2>
+        <div className="imgContainer">
+          <img src={checkListImg} alt="someone writing a list of items with boxes beside each one." />
+        </div>
       </header>
       <section className="formContainer">
         <TaskForm />
