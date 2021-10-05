@@ -67,12 +67,14 @@ function TaskItem(props) {
           <ModalDelete
             onClose={() => setShowDelete(false)} 
             handleModalSubmit={(event) => handleDelete(props.id, event) }
+            title={props.title}
             show={showDelete}
           />
           <button onClick={() => setShowSave(true)}>Save for later</button>
           <ModalSave
             onClose={() => setShowSave(false)} 
             handleModalSubmit={(event) => handleTiming(props.id, props.tomorrow, event) }
+            title={props.title}
             show={showSave}
           />
           <button onClick={() => setShowModify(true)}>Modify</button>

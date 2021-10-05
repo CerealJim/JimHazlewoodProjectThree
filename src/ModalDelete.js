@@ -13,11 +13,8 @@ function ModalDelete(props) {
     <div className="modal" onClick={props.onClose}>
       {/* using 'stopPropagation' method */}
       <div className="modalContent" onClick={e => e.stopPropagation()}>
-        <div className="modalHeader">
-          <h4 className="modalTitle">Are you sure?</h4>
-        </div>
         <form className="modalBody" onSubmit={props.handleModalSubmit}>
-          <label htmlFor="newTaskName">Click yes to continue</label>
+          <label htmlFor="newTaskName">Are you sure you want to delete the task: {props.title}?</label>
           <div className="modalAgree">
             <button className="saveButton" type="submit">Yes</button>
           </div>

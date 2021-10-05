@@ -48,11 +48,11 @@ button, p {
 }
 
 /* Credit to Glen Carstens-Peters at unsplash: https://unsplash.com/photos/RLw-UC03Gwc */
-img {
+/* img {
   width:100%;
   height:auto;
   display:block;
-}
+} */
 
 h1,
 h2,
@@ -85,7 +85,7 @@ header {
   flex-flow: column wrap;
   align-items: center;
   text-align: center;
-  padding:4rem 0;
+  padding:2rem 0;
 }
 h1 {
   border-bottom: 5px solid #C38D9E;
@@ -102,14 +102,25 @@ FORM STYLES
 
 form {
   display:flex;
+  padding: 1rem 0;
 }
 
 /* =====================
 LIST STYLES
 ===================== */
 
+.taskContainer {
+  margin-top:1rem;
+}
+
+.individualTaskContainer {
+  border: 2px solid black;
+
+}
+
 li {
   list-style: none;
+  padding: .5rem 0;
 }
 
 .checkMarked {

@@ -4,8 +4,8 @@ import {ref, onValue} from 'firebase/database';
 import './App.css';
 import TaskItem from './TaskItem.js';
 import TaskForm from './TaskForm.js';
-import TaskTiming from './TaskTiming.js';
-import checkListImg from '../src/checkListImg.jpg'
+// import TaskButtons from './TaskButtons.js';
+
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -19,19 +19,17 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
   // const [userInput, setUserInput] = useState("");
+  const [showToday, setShowToday] = useState(false)
 
   useEffect(() => {
     const dbRef = ref(realtime);
 
     onValue(dbRef, (snapshot) => {
-      // console.log(result.val());
 
       const myData = snapshot.val();
       const newArray = [];
 
       for (let property in myData) {
-        // console.log(property, 'property key');
-        // console.log(myData)
         const taskObject = {
           key: property,
           title: myData[property].taskName,
@@ -49,30 +47,39 @@ function App() {
   return (
     <div className="wrapper">
       <header>
-        <h1>Task List</h1>
-        <h2>Input a task for today or tomorrow</h2>
-        <div className="imgContainer">
-          <img src={checkListImg} alt="someone writing a list of items with boxes beside each one." />
-        </div>
+        <h1>To Do List</h1>
       </header>
       <section className="formContainer">
+        <h2>Let's help you get organized by starting a task list!</h2>
         <TaskForm />
-        <TaskTiming />
+
+        <div className="timingButtonContainer">
+          <button className="todayButton" onClick={() => setShowToday(false)}>Today</button>
+          <button className="deferredButton" onClick={() => setShowToday(true)}>Deferred Tasks</button>
+          {/* <button className="deleteButton" onClick={handleClick}>Delete all tasks</button> */}
+        </div>
       </section>
       <section className="taskContainer">
-        <h3>Today or tomorrow's task list title goes here{}</h3>
+          {
+          showToday === false ?
+            <h3>Today's Task List</h3> :
+            <h3>Deferred Tasks</h3>
+          }
         <div className="individualTaskContainer">
           <ul>
-            {tasks.map((individualTaskObject) => {
-              return (
-                <TaskItem key={individualTaskObject.key} 
-                id={individualTaskObject.key}
-                title={individualTaskObject.title}
-                complete={individualTaskObject.complete}
-                tomorrow={individualTaskObject.tomorrow}
-                />
-              )
-            })}
+            {tasks.filter((individualTaskObject) => {
+              return individualTaskObject.tomorrow === showToday
+              }).map((individualTaskObject) => {
+                return (
+                  <TaskItem key={individualTaskObject.key} 
+                  id={individualTaskObject.key}
+                  title={individualTaskObject.title}
+                  complete={individualTaskObject.complete}
+                  tomorrow={individualTaskObject.tomorrow}
+                  />
+                )
+              })
+            }
           </ul>
         </div>
       </section>
