@@ -9,13 +9,13 @@ import checkListImg from '../src/checkListImg.jpg'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckSquare, faSquare } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 
 
 function App() {
   
-  library.add( faCheckSquare, faSquare)
+  library.add( faCheckSquare, faSquare, faWindowClose)
 
   const [tasks, setTasks] = useState([]);
   // const [userInput, setUserInput] = useState("");
@@ -61,7 +61,7 @@ function App() {
       </section>
       <section className="taskContainer">
         <h3>Today or tomorrow's task list title goes here{}</h3>
-        <div class="individualTaskContainer">
+        <div className="individualTaskContainer">
           <ul>
             {tasks.map((individualTaskObject) => {
               return (
