@@ -47,7 +47,6 @@ button, p {
   font-family: 'Roboto', sans-serif;
 }
 
-/* Credit to Glen Carstens-Peters at unsplash: https://unsplash.com/photos/RLw-UC03Gwc */
 img {
   width:100%;
   height:auto;
@@ -82,7 +81,6 @@ HEADER STYLES
 
 header {
   background-color: #3e6765;
-
 }
 
 .headerContainer {
@@ -90,7 +88,7 @@ header {
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  padding:1rem 0;
+  padding:2rem 0 1rem;
 }
 
 .titleContainer {
@@ -98,22 +96,23 @@ header {
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  /* border: 5px solid transparent; */
-  /* background: linear-gradient(to bottom right, darkgrey, rgb(185, 185, 185)); */
   background: rgb(217, 226, 213);
 }
 
-h1 {
-  border-bottom: 5px solid #3e6765;
-  margin-right: 1rem;
-}
 .imgContainer {
   width:8rem;
   height:auto;
   margin-right: 1rem;
 }
 
+h1 {
+  font-size: 2rem;
+  border-bottom: 5px solid #3e6765;
+  margin-right: 1rem;
+}
+
 h2 {
+  font-size: 1.5rem;
   color:white;
   text-align: center;
   padding: 2rem 0 1rem;
@@ -166,10 +165,7 @@ FORM STYLES
 }
 
 .displayButtonContainer {
-  /* padding:1rem; */
   display:flex;
-  /* flex-wrap: wrap; */
-  /* justify-content: space-around; */
 }
 
 
@@ -177,8 +173,6 @@ FORM STYLES
   position: absolute;
   visibility: hidden;
   left: -10000000rem;
-  /* height: 1px; */
-	/* width: 1px; */
 	border: 0;
 }
 
@@ -242,12 +236,13 @@ li {
 }
 
 .taskCompleteContainer {
-  width: calc(100% - 103.1px);
+  display:flex;
+  width: calc(100% - 105px);
 }
 
 .taskbuttons {
   display:flex;
-  width: 103.1px;
+  width: 105px;
 }
 
 .checkMarked {
@@ -369,4 +364,33 @@ footer p {
   text-align: center;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
+}
+
+/* =====================
+MEDIA QUERES FOR RESPONSIVE DESIGN
+===================== */
+
+/* MOBILE RESPONSIVE DESIGN ADDITION */
+@media (max-width: 480px) {
+  
+  /* HEADER ADJUSTMENT */
+  .imgContainer {
+    width:6rem;
+  }
+  
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+/* MODAL ADJUSTMENT */
+.modalContent {
+  width: 95%;
+  border: 1px solid #3e6765;
+  padding: .5rem 0.25rem;
+  }
+
 }

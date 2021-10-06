@@ -42,20 +42,6 @@ function TaskItem(props) {
     update(dbRef, newTaskObject)
     setShowSave(false)
   }
-  
-  // const handleTitle = (taskId, event) => {
-  //   const dbRef = ref(realtime, taskId)
-  //   const newTaskObject = {
-  //     taskName: event.target.newTaskName.value
-  //   }
-  //   console.log(newTaskObject, "new task object");
-  //   if (newTaskObject.taskName) {
-  //     update(dbRef, newTaskObject)
-  //   } else {
-  //     alert('Please enter text');
-  //   }
-  //   setShowModify(false)
-  // }
 
   const handleTitle = (taskId, event) => {
     if (event.target.newTaskName.value){
