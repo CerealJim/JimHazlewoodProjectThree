@@ -14,7 +14,11 @@ function ModalSave(props) {
       {/* using 'stopPropagation' method */}
       <div className="modalContent" onClick={e => e.stopPropagation()}>
         <form className="modalBody" onSubmit={props.handleModalSubmit}>
-          <label htmlFor="newTaskName">Are you sure you want to defer the task: {props.title}?</label>
+          <label htmlFor="newTaskName">Are you sure you want to move task: "{props.title}" to 
+          {props.tomorrow === false ?
+            " the deferred list" :
+            " today's list"}?
+          </label>
           <div className="modalAgree">
             <button className="saveButton" type="submit">Yes</button>
           </div>

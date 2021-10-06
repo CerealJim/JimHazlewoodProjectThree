@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import realtime from './firebase.js';
 import {ref, onValue, remove} from 'firebase/database';
 import './App.css';
-import TaskItem from './TaskItem.js';
-import TaskForm from './TaskForm.js';
+import TaskItem from './components/TaskItem.js';
+import TaskForm from './components/TaskForm.js';
 import logoSolidOnly from './logoSolidOnly.png'
-import ModalDeleteAll from './ModalDeleteAll.js';
-// import TaskButtons from './TaskButtons.js';
+import ModalDeleteAll from './components/modals/ModalDeleteAll.js';
+
 
 
 
@@ -34,7 +34,6 @@ function App() {
           complete: myData[property].taskComplete,
           tomorrow: myData[property].taskTomorrow
         }
-        console.log(taskObject, "printing task object")
         newArray.push(taskObject);
       }
       setTasks(newArray);
@@ -69,13 +68,14 @@ function App() {
             </div>
             <h1>Taskify</h1>
           </div>
-          <h2>Let's help you get organized by starting a task list!</h2>
         </div>
       </header>
-      <section className="formContainer wrapper">
-        <TaskForm />
-      </section>
-      <section className="taskContainer wrapper">
+      <main className="wrapper">
+        <section className="formContainer">
+          <h2>📝 Let's help you get organized by starting a task list! 📝</h2>
+          <TaskForm />
+        </section>
+        <section className="taskContainer">
         <form className="displayButtonContainer">
           <input type="radio" id="radioToday" name="switch" value="Today" onClick={() => setShowOption("Today")} defaultChecked />
           <label htmlFor="radioToday">Today</label>
@@ -110,6 +110,7 @@ function App() {
           </ul>
         </div>
       </section>
+      </main>
       <footer>
         <div className="footnote wrapper">
           <p>Created at Juno College of Technology</p>

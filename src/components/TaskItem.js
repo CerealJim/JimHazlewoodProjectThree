@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import realtime from './firebase.js';
+import realtime from '../firebase.js';
 import {ref, remove, update} from 'firebase/database';
-import './App.css';
-import ModalModify from './ModalModify.js';
-import ModalSave from './ModalSave.js';
-import ModalDelete from './ModalDelete.js';
+import '../App.css';
+import ModalModify from './modals/ModalModify.js';
+import ModalSave from './modals/ModalSave.js';
+import ModalDelete from './modals/ModalDelete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function TaskItem(props) {
@@ -17,7 +17,6 @@ function TaskItem(props) {
   const handleDelete = (taskId, event) => {
     event.preventDefault();
     const dbRef = ref(realtime, taskId)
-    console.log(dbRef, "dbREF")
     remove(dbRef);
     setShowDelete(false)
   }
@@ -25,7 +24,6 @@ function TaskItem(props) {
   const handleComplete = (taskId, taskComplete) => {
     const dbRef = ref(realtime, taskId)
     let newTaskVal = !taskComplete
-    console.log(newTaskVal)
     const newTaskObject = {
       taskComplete: newTaskVal
     }
@@ -75,14 +73,15 @@ function TaskItem(props) {
               handleModalSubmit={(event) => handleTitle(props.id, event)}
               title={props.title}
               show={showModify}
-            />
+              />
             <button className="deferTaskButton" title="Defer Task" onClick={() => setShowSave(true)}><FontAwesomeIcon icon="user-clock" /></button>
             <ModalSave
               onClose={() => setShowSave(false)} 
               handleModalSubmit={(event) => handleTiming(props.id, props.tomorrow, event) }
               title={props.title}
               show={showSave}
-            />
+              tomorrow={props.tomorrow}
+              />
             <button className="deleteTaskButton" title="Delete" onClick={() => setShowDelete(true)}><FontAwesomeIcon icon="window-close" /></button>
             <ModalDelete
               onClose={() => setShowDelete(false)} 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import realtime from './firebase.js';
+import realtime from '../firebase.js';
 import {ref, push} from 'firebase/database';
-import './App.css';
+import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function TaskForm() {

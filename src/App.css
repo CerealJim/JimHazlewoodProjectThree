@@ -63,16 +63,17 @@ ul {
 
 button {
   color: white;
-  background-color: grey;
   font-weight:700;
   cursor: pointer;
   border-radius: 5px;
 }
 
-button:active,
-button:focus-within,
-button:hover {
-  background-color: darkgray;
+footer {
+  min-height: 10vh;
+}
+
+main {
+  min-height: 60vh;
 }
 
 /* =====================
@@ -81,6 +82,8 @@ HEADER STYLES
 
 header {
   background-color: #3e6765;
+  min-height: 30vh;
+  display:flex;
 }
 
 .headerContainer {
@@ -88,7 +91,7 @@ header {
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  padding:2rem 0 1rem;
+  padding:1rem 0 1rem;
 }
 
 .titleContainer {
@@ -111,18 +114,18 @@ h1 {
   margin-right: 1rem;
 }
 
-h2 {
-  font-size: 1.5rem;
-  color:white;
-  text-align: center;
-  padding: 2rem 0 1rem;
-}
 
 
 
 /* =====================
 FORM STYLES
 ===================== */
+h2 {
+  font-size: 1.5rem;
+  color:#3e6765;
+  text-align: center;
+  padding: .75rem 0 .75rem;
+}
 
 .formContainer {
   padding: 1rem 0;
@@ -232,17 +235,17 @@ li {
 .taskItem {
   display:flex;
   margin: 1rem 0;
-  padding: 0 .25rem;
+  padding: 0 1rem;
 }
 
 .taskCompleteContainer {
   display:flex;
-  width: calc(100% - 105px);
+  width: calc(100% - 120px);
 }
 
 .taskbuttons {
   display:flex;
-  width: 105px;
+  width: 120px;
 }
 
 .checkMarked {
@@ -357,6 +360,7 @@ footer {
   padding: .75rem 0 0.75rem;
   display:flex;
   justify-content: center;
+  align-items: center;
 }
 
 footer p {
@@ -382,8 +386,15 @@ MEDIA QUERES FOR RESPONSIVE DESIGN
     font-size: 1.4rem;
   }
 
+  /* MAIN ADJUSTMENT */
   h2 {
     font-size: 1.1rem;
+  }
+
+  .taskItem {
+
+    margin: 1rem 0;
+    padding: 0 0.25rem;
   }
 
 /* MODAL ADJUSTMENT */
