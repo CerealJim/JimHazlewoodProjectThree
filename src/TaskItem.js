@@ -63,26 +63,26 @@ function TaskItem(props) {
               <p className="checkMarked"><FontAwesomeIcon icon="check-square" /> {props.title}</p>
             }
           </div>
-          <button onClick={() => setShowDelete(true)}>Delete</button>
-          <ModalDelete
-            onClose={() => setShowDelete(false)} 
-            handleModalSubmit={(event) => handleDelete(props.id, event) }
+          <button className="deferTaskButton" title="Defer" onClick={() => setShowModify(true)}><FontAwesomeIcon icon="edit" /></button>
+          <ModalModify 
+            onClose={() => setShowModify(false)} 
+            handleModalSubmit={(event) => handleTitle(props.id, event)}
             title={props.title}
-            show={showDelete}
+            show={showModify}
           />
-          <button onClick={() => setShowSave(true)}>Save for later</button>
+          <button className="deferTaskButton" title="Defer" onClick={() => setShowSave(true)}><FontAwesomeIcon icon="user-clock" /></button>
           <ModalSave
             onClose={() => setShowSave(false)} 
             handleModalSubmit={(event) => handleTiming(props.id, props.tomorrow, event) }
             title={props.title}
             show={showSave}
           />
-          <button onClick={() => setShowModify(true)}>Modify</button>
-          <ModalModify 
-            onClose={() => setShowModify(false)} 
-            handleModalSubmit={(event) => handleTitle(props.id, event)}
+          <button className="deleteTaskButton" title="Delete" onClick={() => setShowDelete(true)}><FontAwesomeIcon icon="window-close" /></button>
+          <ModalDelete
+            onClose={() => setShowDelete(false)} 
+            handleModalSubmit={(event) => handleDelete(props.id, event) }
             title={props.title}
-            show={showModify}
+            show={showDelete}
           />
         </div>
       </li>

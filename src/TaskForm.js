@@ -2,6 +2,7 @@ import { useState } from 'react';
 import realtime from './firebase.js';
 import {ref, push} from 'firebase/database';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function TaskForm() {
   const [userInput, setUserInput] = useState("");
@@ -29,14 +30,17 @@ function TaskForm() {
   return(
     <>
       <form className="taskForm" onSubmit={handleSubmit}>
-        <label htmlFor="usertasks">Type the name of a task to add!</label>
-        <input 
-        type="text" 
-        id="usertasks" 
-        onChange={handleChange}
-        value={userInput}
-        />
-        <button>Add</button>
+        <label htmlFor="usertasks"></label>
+        <div className="inputContainer">
+          <input 
+          type="text" 
+          id="usertasks" 
+          onChange={handleChange}
+          value={userInput}
+          placeholder="ex. start project 3"
+          />
+          <button title="add a task" ><FontAwesomeIcon icon="plus-circle" /></button>
+        </div>
       </form>
     </>
   )

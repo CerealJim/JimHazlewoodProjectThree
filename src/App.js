@@ -10,13 +10,13 @@ import logoSolid from './logoSolid.png'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckSquare, faSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 
 
 
 function App() {
   
-  library.add( faCheckSquare, faSquare, faWindowClose)
+  library.add( faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlusCircle )
 
   const [tasks, setTasks] = useState([]);
   // const [userInput, setUserInput] = useState("");
@@ -79,32 +79,22 @@ function App() {
         <h2>Let's help you get organized by starting a task list!</h2>
         <TaskForm />
         <div>
-          {/* <button className="todayButton" onClick={() => setShowToday(false)}>Today</button> */}
-          {/* <button className="deferredButton" onClick={() => setShowToday(true)}>Deferred Tasks</button> */}
-          {/* <form className="timingButtonContainer radioSwitch">
-            <input type="radio" id="radioToday" name="switchToday" onClick={() => {setShowToday(false); setShowAll(false)}} checked/>
-            <label for="radioToday">Today</label>
-            <input type="radio" id="radioDeferred" name="switchDeferred" onClick={() => {setShowToday(true); setShowAll(false)}} />
-            <label for="radioDeferred">Deferred</label>
-            <input type="radio" id="radioAll" name="switchAll" onClick={() => setShowAll(true)} />
-            <label for="radioAll">All</label>
-          </form> */}
-          <form className="displayButtonContainer">
-            <input type="radio" id="radioToday" name="switchToday" onClick={() => setShowOption("Today")}/>
-            <label htmlFor="radioToday">Today</label>
-            <input type="radio" id="radioDeferred" name="switchDeferred" onClick={() =>  setShowOption("Deferred")} />
-            <label htmlFor="radioDeferred">Deferred</label>
-            <input type="radio" id="radioAll" name="switchAll" onClick={() =>  setShowOption("All")} />
-            <label htmlFor="radioAll">All</label>
-          </form>
-          <button className="deleteCurrentList" onClick={() => deleteCurrent()}>Delete displayed tasks</button>
 
-          {/* <button className="deleteButton" onClick={handleClick}>Delete all tasks</button> */}
         </div>
       </section>
       <section className="taskContainer wrapper">
-          <h3>{showOption} Tasks</h3>
+        <form className="displayButtonContainer">
+          <input type="radio" id="radioToday" name="switch" value="Today" onClick={() => setShowOption("Today")} defaultChecked />
+          <label htmlFor="radioToday">Today</label>
+          <input type="radio" id="radioDeferred" name="switch" value="Deferred" onClick={() =>  setShowOption("Deferred")} />
+          <label htmlFor="radioDeferred">Deferred</label>
+          <input type="radio" id="radioAll" name="switch" value="All" onClick={() =>  setShowOption("All")} />
+          <label htmlFor="radioAll">All</label>
+        </form>
         <div className="individualTaskContainer">
+        <div className="deleteCurrentList">
+          <button className="deleteCurrentListButton" onClick={() => deleteCurrent()}>Delete displayed tasks</button>
+        </div>
           <ul>
             {tasks.filter((individualTaskObject) => {
               return showOption === "All" || individualTaskObject.tomorrow === (showOption === "Deferred" ? true: false)
