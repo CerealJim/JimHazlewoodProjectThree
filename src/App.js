@@ -5,6 +5,7 @@ import './App.css';
 import TaskItem from './TaskItem.js';
 import TaskForm from './TaskForm.js';
 import logoSolid from './logoSolid.png'
+import ModalDeleteAll from './ModalDeleteAll.js';
 // import TaskButtons from './TaskButtons.js';
 
 
@@ -22,6 +23,7 @@ function App() {
   // const [userInput, setUserInput] = useState("");
   // const [showToday, setShowToday] = useState(false)
   // const [showAll, setShowAll] = useState(false)
+  const [showDeleteAll, setShowDeleteAll] = useState(false)
 
   const [showOption, setShowOption] = useState("Today") // three options "today", "deferred", "All"
   
@@ -48,7 +50,8 @@ function App() {
   }, [])
 
 
-  const deleteCurrent = () => {
+  const deleteCurrent = (e) => {
+    e.preventDefault();
     if (showOption === "All") {
       let dbRef = ref(realtime)
       remove(dbRef);
@@ -60,6 +63,7 @@ function App() {
         return remove(dbRef);
       });
     }
+    setShowDeleteAll(false)
   }
 
 
@@ -93,7 +97,12 @@ function App() {
         </form>
         <div className="individualTaskContainer">
         <div className="deleteCurrentList">
-          <button className="deleteCurrentListButton" onClick={() => deleteCurrent()}>Delete displayed tasks</button>
+          <button className="deleteCurrentListButton" onClick={() => setShowDeleteAll(true)}>Delete all tasks</button>
+          <ModalDeleteAll
+            onClose={() => setShowDeleteAll(false)} 
+            handleModalSubmit={(e) => deleteCurrent(e) }
+            show={showDeleteAll}
+          />
         </div>
           <ul>
             {tasks.filter((individualTaskObject) => {

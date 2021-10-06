@@ -30,7 +30,7 @@ function TaskForm() {
   return(
     <>
       <form className="taskForm" onSubmit={handleSubmit}>
-        <label htmlFor="usertasks"></label>
+        <label htmlFor="usertasks">Add <span>Today's</span> Task:</label>
         <div className="inputContainer">
           <input 
           type="text" 
@@ -39,7 +39,7 @@ function TaskForm() {
           value={userInput}
           placeholder="ex. start project 3"
           />
-          <button title="add a task" ><FontAwesomeIcon icon="plus-circle" /></button>
+          <button className="addTaskButton" title="add a task"><FontAwesomeIcon icon="plus-circle" /></button>
         </div>
       </form>
     </>

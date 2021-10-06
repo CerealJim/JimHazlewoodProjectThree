@@ -63,14 +63,15 @@ function TaskItem(props) {
               <p className="checkMarked"><FontAwesomeIcon icon="check-square" /> {props.title}</p>
             }
           </div>
-          <button className="deferTaskButton" title="Defer" onClick={() => setShowModify(true)}><FontAwesomeIcon icon="edit" /></button>
+          
+          <button className="modifyTaskButton" title="Edit Task" onClick={() => setShowModify(true)}><FontAwesomeIcon icon="edit" /></button>
           <ModalModify 
             onClose={() => setShowModify(false)} 
             handleModalSubmit={(event) => handleTitle(props.id, event)}
             title={props.title}
             show={showModify}
           />
-          <button className="deferTaskButton" title="Defer" onClick={() => setShowSave(true)}><FontAwesomeIcon icon="user-clock" /></button>
+          <button className="deferTaskButton" title="Defer Task" onClick={() => setShowSave(true)}><FontAwesomeIcon icon="user-clock" /></button>
           <ModalSave
             onClose={() => setShowSave(false)} 
             handleModalSubmit={(event) => handleTiming(props.id, props.tomorrow, event) }

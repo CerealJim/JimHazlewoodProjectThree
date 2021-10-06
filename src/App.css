@@ -86,7 +86,7 @@ header {
 }
 
 .headerContainer {
-    display: flex;
+  display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
@@ -113,6 +113,8 @@ h1 {
 }
 
 
+
+
 /* =====================
 FORM STYLES
 ===================== */
@@ -123,16 +125,17 @@ FORM STYLES
 
 h2 {
   text-align: center;
-  padding: .5rem 0;
-  /* background-color:rgb(185, 185, 185); */
+  padding: 1rem 0;
 }
 
 .taskForm {
-  /* border: 5px solid rgb(185, 185, 185); */
   border-radius: 15px;
   display:flex;
-  /* flex-direction: column; */
-  /* padding: 1rem 0; */
+  flex-direction: column;
+}
+
+.taskForm span {
+  font-style: italic;
 }
 
 .inputContainer {
@@ -140,6 +143,17 @@ h2 {
 }
 .inputContainer input {
   flex: 1 1 auto;
+  border: none;
+}
+
+.addTaskButton {
+  background-color: green;
+}
+
+.addTaskButton:active,
+.addTaskButton:focus-within,
+.addTaskButton:hover {
+  background-color: rgb(0, 90, 0);
 }
 
 .displayButtonContainer {
@@ -163,16 +177,19 @@ h2 {
   background: #e4e4e4;
   width: 5rem;
   text-align: center;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(62, 103, 101, 0.6);
 	transition: all 0.1s ease-in-out;
-  border-radius: 4px;
+  border-radius: 4px 4px 0px 0px;
 }
 
-.displayButtonContainer label:hover {
+.displayButtonContainer label:hover,
+.displayButtonContainer label:focus-within,
+.displayButtonContainer label:active {
 cursor: pointer;
 }
 .displayButtonContainer input:checked + label {
   background-color: #a5dc86;
+  border-bottom: none;
 }
 
 /* =====================
@@ -181,10 +198,12 @@ LIST STYLES
 
 .taskContainer {
   margin-top:1rem;
+  margin-bottom: 2rem;
 }
 
 .individualTaskContainer {
-  border: 2px solid black;
+  border: 2px solid rgb(62, 103, 101);
+  border-radius: 0px 5px 5px 5px;
 }
 
 .deleteCurrentList {
@@ -193,8 +212,17 @@ LIST STYLES
   padding:.25rem;
 }
 
+.deleteCurrentListButton {
+  background-color: crimson;
+}
+
+.deleteCurrentListButton:active,
+.deleteCurrentListButton:focus-within,
+.deleteCurrentListButton:hover {
+  background-color: rgb(133, 14, 38);
+}
+
 li {
-  /* background-color: white; */
   list-style: none;
   margin: .5rem 0;
 }
@@ -202,17 +230,12 @@ li {
 .taskItem {
   display:flex;
   padding: 0 .25rem;
+  margin: 1rem 0;
 }
-
-.taskItem p {
-  flex: 1 1 auto;
-}
-
 
 .checkMarked {
   text-decoration: line-through;
 }
-
 
 .saveButton:active,
 .saveButton:focus-within,
