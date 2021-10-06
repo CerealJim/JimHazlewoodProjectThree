@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import realtime from './firebase.js';
-import {ref, onValue} from 'firebase/database';
+import {ref, onValue, remove} from 'firebase/database';
 import './App.css';
 import TaskItem from './TaskItem.js';
 import TaskForm from './TaskForm.js';
+import logoSolid from './logoSolid.png'
 // import TaskButtons from './TaskButtons.js';
 
 
@@ -19,8 +20,11 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
   // const [userInput, setUserInput] = useState("");
-  const [showToday, setShowToday] = useState(false)
+  // const [showToday, setShowToday] = useState(false)
+  // const [showAll, setShowAll] = useState(false)
 
+  const [showOption, setShowOption] = useState("Today") // three options "today", "deferred", "All"
+  
   useEffect(() => {
     const dbRef = ref(realtime);
 
@@ -44,31 +48,66 @@ function App() {
   }, [])
 
 
+  const deleteCurrent = () => {
+    if (showOption === "All") {
+      let dbRef = ref(realtime)
+      remove(dbRef);
+    } else{
+      tasks.filter((individualTaskObject) => {
+        return individualTaskObject.tomorrow === (showOption === "Deferred" ? true: false)
+      }).map((filteredTask) =>{
+        let dbRef = ref(realtime, filteredTask.key)
+        return remove(dbRef);
+      });
+    }
+  }
+
+
   return (
-    <div className="wrapper">
+    <>
       <header>
-        <h1>To Do List</h1>
+        <div className="headerContainer wrapper">
+          <div className="titleContainer">
+            <div className="imgContainer">
+              <img src={logoSolid} alt="Logo containing a pad of paper and a pen" />
+            </div>
+            <h1>Taskify</h1>
+          </div>
+        </div>
       </header>
-      <section className="formContainer">
+      <section className="formContainer wrapper">
         <h2>Let's help you get organized by starting a task list!</h2>
         <TaskForm />
+        <div>
+          {/* <button className="todayButton" onClick={() => setShowToday(false)}>Today</button> */}
+          {/* <button className="deferredButton" onClick={() => setShowToday(true)}>Deferred Tasks</button> */}
+          {/* <form className="timingButtonContainer radioSwitch">
+            <input type="radio" id="radioToday" name="switchToday" onClick={() => {setShowToday(false); setShowAll(false)}} checked/>
+            <label for="radioToday">Today</label>
+            <input type="radio" id="radioDeferred" name="switchDeferred" onClick={() => {setShowToday(true); setShowAll(false)}} />
+            <label for="radioDeferred">Deferred</label>
+            <input type="radio" id="radioAll" name="switchAll" onClick={() => setShowAll(true)} />
+            <label for="radioAll">All</label>
+          </form> */}
+          <form className="displayButtonContainer">
+            <input type="radio" id="radioToday" name="switchToday" onClick={() => setShowOption("Today")}/>
+            <label htmlFor="radioToday">Today</label>
+            <input type="radio" id="radioDeferred" name="switchDeferred" onClick={() =>  setShowOption("Deferred")} />
+            <label htmlFor="radioDeferred">Deferred</label>
+            <input type="radio" id="radioAll" name="switchAll" onClick={() =>  setShowOption("All")} />
+            <label htmlFor="radioAll">All</label>
+          </form>
+          <button className="deleteCurrentList" onClick={() => deleteCurrent()}>Delete displayed tasks</button>
 
-        <div className="timingButtonContainer">
-          <button className="todayButton" onClick={() => setShowToday(false)}>Today</button>
-          <button className="deferredButton" onClick={() => setShowToday(true)}>Deferred Tasks</button>
           {/* <button className="deleteButton" onClick={handleClick}>Delete all tasks</button> */}
         </div>
       </section>
-      <section className="taskContainer">
-          {
-          showToday === false ?
-            <h3>Today's Task List</h3> :
-            <h3>Deferred Tasks</h3>
-          }
+      <section className="taskContainer wrapper">
+          <h3>{showOption} Tasks</h3>
         <div className="individualTaskContainer">
           <ul>
             {tasks.filter((individualTaskObject) => {
-              return individualTaskObject.tomorrow === showToday
+              return showOption === "All" || individualTaskObject.tomorrow === (showOption === "Deferred" ? true: false)
               }).map((individualTaskObject) => {
                 return (
                   <TaskItem key={individualTaskObject.key} 
@@ -84,9 +123,11 @@ function App() {
         </div>
       </section>
       <footer>
-        
+        <div className="footnote wrapper">
+          <p>Created at Juno College of Technology</p>
+        </div>
       </footer>
-    </div>
+    </>
   );
 }
 

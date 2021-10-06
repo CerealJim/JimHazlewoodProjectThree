@@ -23,12 +23,12 @@ GENERAL STYLES
 html {
 	font-size: 125%; /* setting font-size default to 20px*/
 	line-height: 1.5;
-  color: white;
-  background-color: #85DCBA;
+  color: #3e6765;
+  background-color: rgb(217, 226, 213);
 }
 
 .wrapper {
-  max-width:1200px;
+  max-width:1000px;
   width:85%;
   margin:0 auto;
 }
@@ -48,11 +48,11 @@ button, p {
 }
 
 /* Credit to Glen Carstens-Peters at unsplash: https://unsplash.com/photos/RLw-UC03Gwc */
-/* img {
+img {
   width:100%;
   height:auto;
   display:block;
-} */
+}
 
 h1,
 h2,
@@ -81,28 +81,91 @@ HEADER STYLES
 ===================== */
 
 header {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-  text-align: center;
-  padding:2rem 0;
+  background-color: #3e6765;
+
 }
+
+.headerContainer {
+    display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  padding:1rem 0;
+}
+
+.titleContainer {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid transparent;
+  background: linear-gradient(to bottom right, darkgrey, rgb(185, 185, 185));
+}
+
 h1 {
-  border-bottom: 5px solid #C38D9E;
-  margin-bottom: 1.5rem;
+  border-bottom: 5px solid #3e6765;
+  margin-right: 1rem;
 }
 .imgContainer {
-  width:30%;
+  width:8rem;
   height:auto;
+  margin-right: 1rem;
 }
+
 
 /* =====================
 FORM STYLES
 ===================== */
 
-form {
-  display:flex;
+.formContainer {
   padding: 1rem 0;
+}
+
+h2 {
+  text-align: center;
+  padding: .5rem 0;
+  /* background-color:rgb(185, 185, 185); */
+}
+
+.taskForm {
+  border: 5px solid rgb(185, 185, 185);
+  border-radius: 15px;
+  display:flex;
+  flex-direction: column;
+  /* padding: 1rem 0; */
+}
+
+.displayButtonContainer {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.displayButtonContainer input {
+  position: absolute;
+  visibility: hidden;
+  left: -10000000rem;
+  height: 1px;
+	width: 1px;
+	border: 0;
+}
+
+.displayButtonContainer label {
+  background: rgb(185, 185, 185);
+  width: 5rem;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+	/* box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(0, 0, 0, 0.1); */
+	transition: all 0.1s ease-in-out;
+  border-radius: 4px;
+}
+
+.displayButtonContainer label:hover {
+cursor: pointer;
+}
+.displayButtonContainer input:checked + label {
+  background-color: yellow;
+  box-shadow: none;
 }
 
 /* =====================
@@ -114,13 +177,14 @@ LIST STYLES
 }
 
 .individualTaskContainer {
-  border: 2px solid black;
-
+  /* border: 2px solid black; */
 }
 
 li {
+  background-color: white;
   list-style: none;
-  padding: .5rem 0;
+  margin: .5rem 0;
+
 }
 
 .checkMarked {
@@ -147,7 +211,7 @@ MODAL STYLES
   width: 70%;
   max-width: 700px;
   border-radius: 15px;
-  border: 5px solid #41B3A3;
+  border: 5px solid #3e6765;
   padding: .5rem;
   color: #000;
   background-color: white;
@@ -200,13 +264,19 @@ FOOTER STYLES
 ===================== */
 
 footer {
-  text-align: center;
-  padding: .5rem 0;
+  /* position:relative;
+  bottom: 0;
+  right: 0;
+  left: 0; */
+  background-color: #3e6765;
+  padding: .75rem 0 0.75rem;
   display:flex;
-  align-items: center;
+  justify-content: center;
 }
 
-footer p,
-footer a {
-    color: white;
+footer p {
+  color: white;
+  text-align: center;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }

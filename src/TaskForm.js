@@ -28,15 +28,15 @@ function TaskForm() {
 
   return(
     <>
-      <form onSubmit={handleSubmit}>
-          <label htmlFor="usertasks">Type the name of a task to add!</label>
-          <input 
-          type="text" 
-          id="usertasks" 
-          onChange={handleChange}
-          value={userInput}
-          />
-          <button>Add it!</button>
+      <form className="taskForm" onSubmit={handleSubmit}>
+        <label htmlFor="usertasks">Type the name of a task to add!</label>
+        <input 
+        type="text" 
+        id="usertasks" 
+        onChange={handleChange}
+        value={userInput}
+        />
+        <button>Add</button>
       </form>
     </>
   )
