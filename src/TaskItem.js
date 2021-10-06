@@ -43,13 +43,32 @@ function TaskItem(props) {
     setShowSave(false)
   }
   
+  // const handleTitle = (taskId, event) => {
+  //   const dbRef = ref(realtime, taskId)
+  //   const newTaskObject = {
+  //     taskName: event.target.newTaskName.value
+  //   }
+  //   console.log(newTaskObject, "new task object");
+  //   if (newTaskObject.taskName) {
+  //     update(dbRef, newTaskObject)
+  //   } else {
+  //     alert('Please enter text');
+  //   }
+  //   setShowModify(false)
+  // }
+
   const handleTitle = (taskId, event) => {
-    const dbRef = ref(realtime, taskId)
-    const newTaskObject = {
-      taskName: event.target.newTaskName.value,
+    if (event.target.newTaskName.value){
+      const dbRef = ref(realtime, taskId)
+      const newTaskObject = {
+        taskName: event.target.newTaskName.value
+      }
+      update(dbRef, newTaskObject)
+      setShowModify(false)
+    } else{
+      event.preventDefault()
+      alert('Please enter text');
     }
-    update(dbRef, newTaskObject)
-    setShowModify(false)
   }
 
   return(
@@ -63,28 +82,29 @@ function TaskItem(props) {
               <p className="checkMarked"><FontAwesomeIcon icon="check-square" /> {props.title}</p>
             }
           </div>
-          
-          <button className="modifyTaskButton" title="Edit Task" onClick={() => setShowModify(true)}><FontAwesomeIcon icon="edit" /></button>
-          <ModalModify 
-            onClose={() => setShowModify(false)} 
-            handleModalSubmit={(event) => handleTitle(props.id, event)}
-            title={props.title}
-            show={showModify}
-          />
-          <button className="deferTaskButton" title="Defer Task" onClick={() => setShowSave(true)}><FontAwesomeIcon icon="user-clock" /></button>
-          <ModalSave
-            onClose={() => setShowSave(false)} 
-            handleModalSubmit={(event) => handleTiming(props.id, props.tomorrow, event) }
-            title={props.title}
-            show={showSave}
-          />
-          <button className="deleteTaskButton" title="Delete" onClick={() => setShowDelete(true)}><FontAwesomeIcon icon="window-close" /></button>
-          <ModalDelete
-            onClose={() => setShowDelete(false)} 
-            handleModalSubmit={(event) => handleDelete(props.id, event) }
-            title={props.title}
-            show={showDelete}
-          />
+          <div className="taskButtons">
+            <button className="modifyTaskButton" title="Edit Task" onClick={() => setShowModify(true)}><FontAwesomeIcon icon="edit" /></button>
+            <ModalModify 
+              onClose={() => setShowModify(false)} 
+              handleModalSubmit={(event) => handleTitle(props.id, event)}
+              title={props.title}
+              show={showModify}
+            />
+            <button className="deferTaskButton" title="Defer Task" onClick={() => setShowSave(true)}><FontAwesomeIcon icon="user-clock" /></button>
+            <ModalSave
+              onClose={() => setShowSave(false)} 
+              handleModalSubmit={(event) => handleTiming(props.id, props.tomorrow, event) }
+              title={props.title}
+              show={showSave}
+            />
+            <button className="deleteTaskButton" title="Delete" onClick={() => setShowDelete(true)}><FontAwesomeIcon icon="window-close" /></button>
+            <ModalDelete
+              onClose={() => setShowDelete(false)} 
+              handleModalSubmit={(event) => handleDelete(props.id, event) }
+              title={props.title}
+              show={showDelete}
+            />
+          </div>
         </div>
       </li>
     </>

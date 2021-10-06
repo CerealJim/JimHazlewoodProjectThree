@@ -23,7 +23,7 @@ function TaskForm() {
       push(dbRef, taskObject);
       setUserInput("");
     } else {
-      alert('write something!');
+      alert('Please enter text');
     }
   }
 
@@ -39,7 +39,7 @@ function TaskForm() {
           value={userInput}
           placeholder="ex. start project 3"
           />
-          <button className="addTaskButton" title="add a task"><FontAwesomeIcon icon="plus-circle" /></button>
+          <button className="addTaskButton" title="add a task"><FontAwesomeIcon icon="plus" /></button>
         </div>
       </form>
     </>

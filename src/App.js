@@ -4,37 +4,29 @@ import {ref, onValue, remove} from 'firebase/database';
 import './App.css';
 import TaskItem from './TaskItem.js';
 import TaskForm from './TaskForm.js';
-import logoSolid from './logoSolid.png'
+import logoSolidOnly from './logoSolidOnly.png'
 import ModalDeleteAll from './ModalDeleteAll.js';
 // import TaskButtons from './TaskButtons.js';
 
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 
 function App() {
-  
-  library.add( faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlusCircle )
+  library.add( faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlus )
 
   const [tasks, setTasks] = useState([]);
-  // const [userInput, setUserInput] = useState("");
-  // const [showToday, setShowToday] = useState(false)
-  // const [showAll, setShowAll] = useState(false)
   const [showDeleteAll, setShowDeleteAll] = useState(false)
-
   const [showOption, setShowOption] = useState("Today") // three options "today", "deferred", "All"
   
   useEffect(() => {
     const dbRef = ref(realtime);
-
     onValue(dbRef, (snapshot) => {
-
       const myData = snapshot.val();
       const newArray = [];
-
       for (let property in myData) {
         const taskObject = {
           key: property,
@@ -73,18 +65,15 @@ function App() {
         <div className="headerContainer wrapper">
           <div className="titleContainer">
             <div className="imgContainer">
-              <img src={logoSolid} alt="Logo containing a pad of paper and a pen" />
+              <img src={logoSolidOnly} alt="Logo containing a pad of paper and a pen" />
             </div>
             <h1>Taskify</h1>
           </div>
+          <h2>Let's help you get organized by starting a task list!</h2>
         </div>
       </header>
       <section className="formContainer wrapper">
-        <h2>Let's help you get organized by starting a task list!</h2>
         <TaskForm />
-        <div>
-
-        </div>
       </section>
       <section className="taskContainer wrapper">
         <form className="displayButtonContainer">
