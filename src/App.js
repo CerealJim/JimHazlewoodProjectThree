@@ -6,13 +6,8 @@ import TaskItem from './components/TaskItem.js';
 import TaskForm from './components/TaskForm.js';
 import logoSolidOnly from './logoSolidOnly.png'
 import ModalDeleteAll from './components/modals/ModalDeleteAll.js';
-
-
-
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
-
 
 
 function App() {
@@ -59,14 +54,13 @@ function App() {
     setShowDeleteAll(false)
   }
 
-
   return (
     <>
       <header>
         <div className="headerContainer wrapper">
           <div className="titleContainer">
             <div className="imgContainer">
-              <img src={logoSolidOnly} alt="Logo containing a pad of paper and a pen" />
+              <img src={logoSolidOnly} alt="Website logo containing a pad of paper and a pen" />
             </div>
             <h1>Taskify</h1>
           </div>
