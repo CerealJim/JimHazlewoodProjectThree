@@ -16,12 +16,14 @@ import { faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlus } f
 
 
 function App() {
+  //Adding FontAwesome icons to use
   library.add( faCheckSquare, faSquare, faWindowClose, faUserClock, faEdit, faPlus )
 
   const [tasks, setTasks] = useState([]);
   const [showDeleteAll, setShowDeleteAll] = useState(false)
   const [showOption, setShowOption] = useState("Today") // three options "today", "deferred", "All"
   
+  //Create the subscrtiption(link) to firebase and will update anytime a value changes
   useEffect(() => {
     const dbRef = ref(realtime);
     onValue(dbRef, (snapshot) => {
@@ -40,7 +42,7 @@ function App() {
     })
   }, [])
 
-
+  //Delete all button function based on the showOption tab selected
   const deleteCurrent = (e) => {
     e.preventDefault();
     if (showOption === "All") {
@@ -76,44 +78,44 @@ function App() {
           <TaskForm />
         </section>
         <section className="taskContainer">
-        <form className="displayButtonContainer">
-          <input type="radio" id="radioToday" name="switch" value="Today" onClick={() => setShowOption("Today")} defaultChecked />
-          <label htmlFor="radioToday">Today</label>
-          <input type="radio" id="radioDeferred" name="switch" value="Deferred" onClick={() =>  setShowOption("Deferred")} />
-          <label htmlFor="radioDeferred">Deferred</label>
-          <input type="radio" id="radioAll" name="switch" value="All" onClick={() =>  setShowOption("All")} />
-          <label htmlFor="radioAll">All</label>
-        </form>
-        <div className="individualTaskContainer">
-        <div className="deleteCurrentList">
-          <button className="deleteCurrentListButton" onClick={() => setShowDeleteAll(true)}>Delete all tasks</button>
-          <ModalDeleteAll
-            onClose={() => setShowDeleteAll(false)} 
-            handleModalSubmit={(e) => deleteCurrent(e) }
-            show={showDeleteAll}
-          />
-        </div>
-          <ul>
-            {tasks.filter((individualTaskObject) => {
-              return showOption === "All" || individualTaskObject.tomorrow === (showOption === "Deferred" ? true: false)
-              }).map((individualTaskObject) => {
-                return (
-                  <TaskItem key={individualTaskObject.key} 
-                  id={individualTaskObject.key}
-                  title={individualTaskObject.title}
-                  complete={individualTaskObject.complete}
-                  tomorrow={individualTaskObject.tomorrow}
-                  />
-                )
-              })
-            }
-          </ul>
-        </div>
-      </section>
+          <form className="displayButtonContainer">
+            <input type="radio" id="radioToday" name="switch" value="Today" onClick={() => setShowOption("Today")} defaultChecked />
+            <label htmlFor="radioToday">Today</label>
+            <input type="radio" id="radioDeferred" name="switch" value="Deferred" onClick={() =>  setShowOption("Deferred")} />
+            <label htmlFor="radioDeferred">Deferred</label>
+            <input type="radio" id="radioAll" name="switch" value="All" onClick={() =>  setShowOption("All")} />
+            <label htmlFor="radioAll">All</label>
+          </form>
+          <div className="individualTaskContainer">
+          <div className="deleteCurrentList">
+            <button className="deleteCurrentListButton" onClick={() => setShowDeleteAll(true)}>Delete all tasks</button>
+            <ModalDeleteAll
+              onClose={() => setShowDeleteAll(false)} 
+              handleModalSubmit={(e) => deleteCurrent(e) }
+              show={showDeleteAll}
+            />
+          </div>
+            <ul>
+              {tasks.filter((individualTaskObject) => {
+                return showOption === "All" || individualTaskObject.tomorrow === (showOption === "Deferred" ? true: false)
+                }).map((individualTaskObject) => {
+                  return (
+                    <TaskItem key={individualTaskObject.key} 
+                    id={individualTaskObject.key}
+                    title={individualTaskObject.title}
+                    complete={individualTaskObject.complete}
+                    tomorrow={individualTaskObject.tomorrow}
+                    />
+                  )
+                })
+              }
+            </ul>
+          </div>
+        </section>
       </main>
       <footer>
         <div className="footnote wrapper">
-          <p>Created at Juno College of Technology</p>
+          <p>Created by Jim Hazlewood at <a href="https://junocollege.com/">Juno College of Technology</a> 2021</p>
         </div>
       </footer>
     </>

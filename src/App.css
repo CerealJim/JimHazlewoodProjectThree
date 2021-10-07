@@ -76,6 +76,10 @@ main {
   min-height: 60vh;
 }
 
+a {
+  color:white;
+}
+
 /* =====================
 HEADER STYLES
 ===================== */
@@ -189,6 +193,7 @@ h2 {
 }
 
 .displayButtonContainer label:hover,
+.displayButtonContainer label:focus,
 .displayButtonContainer label:focus-within,
 .displayButtonContainer label:active {
 cursor: pointer;
@@ -364,6 +369,7 @@ footer {
 }
 
 footer p {
+  font-size: 18px;
   color: white;
   text-align: center;
   border-top: 1px solid white;
