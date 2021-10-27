@@ -37,7 +37,7 @@ function TaskForm() {
           id="usertasks" 
           onChange={handleChange}
           value={userInput}
-          placeholder="ex. start project 3"
+          placeholder="ex. Meditate"
           />
           <button className="addTaskButton" title="add a task"><FontAwesomeIcon icon="plus" /></button>
         </div>

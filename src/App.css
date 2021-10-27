@@ -344,7 +344,7 @@ MODAL STYLES
 .modalBody {
   display: flex;
   flex-direction: column;
-  padding: 1rem 0 1rem;
+  padding: 1.5rem 0 1rem;
 }
 
 .modalModify {
